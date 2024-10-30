@@ -1,0 +1,10 @@
+@res8 <- (0x16 :u8) + (low EAX 8);
+@OF <- ((high (low EAX 8) 1) = (0x0 :u1)) & ((high (low EAX 8) 1) != (high @res8 1));
+@SF <- (@res8 <s (0x0 :u8));
+@ZF <- (@res8 = (0x0 :u8));
+@AF <- ((0x6 :u5) + (extend (low (low EAX 8) 4) to 5 with unsigned)){4};
+@PF <- !((((((((low @res8 1) ^ (low @res8 2)) ^ (low @res8 3)) ^ (low @res8 4)) ^ (low @res8 5)) ^ (low @res8 6)) ^ (low @res8 7)) ^ (low @res8 8));
+@CF <- ((0x16 :u9) + (extend (low EAX 8) to 9 with unsigned)){8};
+EAX <- (concat (high EAX 24) with @res8);
+goto 0x2;
+
